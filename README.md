@@ -19,10 +19,11 @@ This Command Line Tool helps you to manage Web Map Services.
 
 ### Docker
 
-You have Docker installed? Then try this command.
+You have Docker installed? Then try this commands.
 
 ```console
 docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 25832 -b 565000,5930000,570000,5935000 -w 1000
+docker run wroge/wms cap -u http://ows.terrestris.de/osm/service
 ```
 Docker-Images [@DockerHub](https://hub.docker.com/r/wroge/wms)
 
