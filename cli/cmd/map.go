@@ -5,6 +5,7 @@ import (
 	"bytes"
 	"errors"
 	"fmt"
+	"log"
 	"math"
 	"os"
 	"path/filepath"
@@ -144,7 +145,11 @@ var getmapCommand = &cobra.Command{
 			if err != nil {
 				return err
 			}
-			fmt.Println("Done")
+			pwd, err := os.Getwd()
+			if err != nil {
+				log.Fatal(err)
+			}
+			fmt.Println("Done. Your file is here: " + filepath.Join(pwd, "output"))
 		}
 
 		if cmd.Flag("dry-run").Changed {

@@ -1,5 +1,9 @@
 #!/bin/sh
 
+if [ $1 == "upgrade" ]; then
+    docker pull -a wroge/wms
+fi
+
 if [ -z $VERSION ]; then
     VERSION+=":latest"
 else 

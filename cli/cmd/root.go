@@ -17,7 +17,7 @@ var root = &cobra.Command{
 	Long: `This program helps you to generate images via web map services.
 
 Configuration file: $HOME/.wms-cli.yaml
-Further informations and examples: https://github.com/wroge/wms-cli`,
+Further informations and examples: https://github.com/wroge/wms`,
 	SilenceUsage: true,
 }
 
