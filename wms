@@ -1,6 +1,6 @@
 #!/bin/sh
 
-if [ $1 == "upgrade" ]; then
+if [[ $1 == "upgrade" ]; then
     docker pull -a wroge/wms
 fi
 

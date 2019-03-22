@@ -27,32 +27,32 @@ docker run wroge/wms cap -u http://ows.terrestris.de/osm/service
 ```
 Docker-Images [@DockerHub](https://hub.docker.com/r/wroge/wms)
 
-Example-Script for better usage.
+[Example-Script](https://github.com/wroge/wms/blob/master/wms) for better usage. (tested for macOS)
 
-```sh
-#!/bin/sh
+```console
+echo '#!/bin/sh
 
-if [ $1 == "upgrade" ]; then
+if [[ $1 == "upgrade" ]]; then
     docker pull -a wroge/wms
 fi
 
 if [ -z $VERSION ]; then
     VERSION+=":latest"
-else 
+else
     VERSION=":${VERSION}"
 fi
 
-docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@
+docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@' > ${PATH%%:*}/wms && chmod +x ${PATH%%:*}/wms
 ```
 
 ## Configuration
 
 ```$HOME/wms-config/.wms.yaml```
 
-Example Configuration.
+Example [Configuration](https://github.com/wroge/wms/blob/master/wms-config/.wms.yaml). (tested for macOS)
 
-```yaml
-terrestris:
+```console
+mkdir -m 777 ${HOME}/wms-config && echo 'terrestris:
   epsg: 25832
   file-name: example
   format: ""
@@ -60,7 +60,7 @@ terrestris:
   - TOPO-WMS
   output-folder: ""
   url: http://ows.terrestris.de/osm/service
-  version: ""
+  version: ""' > ${HOME}/wms-config/.wms.yaml && chmod +x ${HOME}/wms-config/.wms.yaml
 ```
 
 And Usage.
@@ -162,7 +162,7 @@ Done. Your requested file is here: /output
 Or with this [Shell-Script](#docker) and this [Configuration-File](#configuration).
 
 ```console
-./wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
+wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
 ## FAQ
