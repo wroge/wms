@@ -135,3 +135,25 @@ Flags:
 Global Flags:
       --help   Help about any command
 ```
+
+## Example
+
+In this Example we use the OSM-WMS from [terrestris](https://ows.terrestris.de/dienste.html#openstreetmap-wms).
+
+From terrestris provided EPSG-Codes: 900913, 4326, 3857
+
+From wroge/wms provided EPSG-Codes: (go-coo@v0.0.3)
+
+```console
+docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 12345
+Error: Invalid EPSG: 12345
+Valid EPSGs: [900913 4326 3857 31468 4462 32632 25832 25833 5668 31466 31467 4647 5650 3067 5669 31469 32633]
+```
+
+So we can use for example EPSG25832.
+
+```console
+docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 25832 -b 565000,5930000,570000,5935000 -w 1000 -n test
+http://ows.terrestris.de/osm/service?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&FORMAT=image/jpeg&LAYERS=OSM-WMS&STYLES=&SRS=EPSG:3857&WIDTH=1000&HEIGHT=1000&BBOX=1110998.5364747,7078816.8197398,1119515.6176323,7087113.4792617
+Done. Your requested file is here: /output
+```
