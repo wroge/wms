@@ -158,3 +158,13 @@ http://ows.terrestris.de/osm/service?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&FO
 Done. Your requested file is here: /output
 ```
 ![test](https://user-images.githubusercontent.com/44040384/54848416-7ffab480-4ce1-11e9-9fa9-b092a6e096ad.jpeg)
+
+Or with this [Shell-Script](#docker) and this [Configuration-File](#configuration).
+
+```console
+./wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
+```
+
+## FAQ
+
+...For any problems/questions please open an issue.
