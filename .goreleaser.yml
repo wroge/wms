@@ -39,4 +39,5 @@ changelog:
     - '^test:'
 dockers:
   - image_templates:
-    - wroge/wms
+    - "wroge/wms:latest"
+    - "wroge/wms:{{ .Tag }}"
