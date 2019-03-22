@@ -34,6 +34,7 @@ echo '#!/bin/sh
 
 if [[ $1 == "upgrade" ]]; then
     docker pull -a wroge/wms
+    exit 0
 fi
 
 if [ -z $VERSION ]; then
