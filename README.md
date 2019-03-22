@@ -142,7 +142,7 @@ In this Example we use the OSM-WMS from [terrestris](https://ows.terrestris.de/d
 
 From terrestris provided EPSG-Codes: 900913, 4326, 3857
 
-From wroge/wms provided EPSG-Codes: (go-coo@v0.0.3)
+From wroge/wms provided EPSG-Codes: [go-coo](https://github.com/wroge/go-coo)
 
 ```console
 docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 12345
