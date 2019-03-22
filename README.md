@@ -71,6 +71,8 @@ wms cap terrestris
 docker run -v $HOME/wms-config:/wms-config wroge/wms cap terrestris
 ```
 
+Note: Before v0.0.5 Config-File: ```$HOME/.wms-cli.yaml```
+
 ## Help
 
 GetMap.
