@@ -10,4 +10,4 @@ else
     VERSION=":${VERSION}"
 fi
 
-docker run -v "$(pwd)/output:/output" wroge/wms$VERSION $@
+docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@

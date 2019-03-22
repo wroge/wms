@@ -36,6 +36,7 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+    - '^wroge/wms:latest'
 dockers:
   - image_templates:
     - "wroge/wms:latest"

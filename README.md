@@ -2,7 +2,7 @@
 
 This Command Line Tool helps you to manage Web Map Services.
 
-- Configuration-File
+- Configuration-File ```$HOME/wms-config/.wms.yaml```
 - Support-Messages
 - Automatic Coordinate-Transformation by [go-coo](https://github.com/wroge/go-coo)
 - Download multiple Bounding Boxes at once
@@ -42,9 +42,34 @@ else
     VERSION=":${VERSION}"
 fi
 
-docker run -v "$(pwd)/output:/output" wroge/wms$VERSION $@
+docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@
 ```
 
+## Configuration
+
+```$HOME/wms-config/.wms.yaml```
+
+Example Configuration.
+
+```yaml
+terrestris:
+  epsg: 25832
+  file-name: example
+  format: ""
+  layers:
+  - TOPO-WMS
+  output-folder: ""
+  url: http://ows.terrestris.de/osm/service
+  version: ""
+```
+
+And Usage.
+
+```console
+wms cap terrestris
+
+docker run -v $HOME/wms-config:/wms-config wroge/wms cap terrestris
+```
 
 ## Help
 
