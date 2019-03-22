@@ -150,7 +150,7 @@ Error: Invalid EPSG: 12345
 Valid EPSGs: [900913 4326 3857 31468 4462 32632 25832 25833 5668 31466 31467 4647 5650 3067 5669 31469 32633]
 ```
 
-So we can use for example EPSG25832.
+So we can use for example EPSG:25832 and the coordinates are automatically converted to a supported system. (here EPSG:3857)
 
 ```console
 docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 25832 -b 565000,5930000,570000,5935000 -w 1000 -n test
