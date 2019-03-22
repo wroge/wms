@@ -19,7 +19,6 @@ builds:
   main: ./cli
   env:
   - CGO_ENABLED=0
-  - WMS_VERSION="{{ .Tag }}"
 archive:
   replacements:
     darwin: MacOS
