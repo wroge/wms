@@ -250,7 +250,8 @@ var getmapCommand = &cobra.Command{
 					return x
 				}
 			}
-			fmt.Println("Done")
+			pwd, _ := os.Getwd()
+			fmt.Println("Done. Your requested file is here: " + filepath.Join(pwd, "output"))
 		}
 		return nil
 	},
