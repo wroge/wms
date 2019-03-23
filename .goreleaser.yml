@@ -50,9 +50,8 @@ scoop:
   homepage: https://github.com/wroge/wms
   description: "Extension for easy use of Web Map Services."
 brew:
-    github:
-      owner: wroge
-      name: homebrew-tap
-    description: "Extension for easy use of Web Map Services."
-    homepage:  https://github.com/wroge/wms
-    folder: Formula
+  github:
+    owner: wroge
+    name: homebrew-tap
+  description: "Extension for easy use of Web Map Services."
+  homepage:  https://github.com/wroge/wms
