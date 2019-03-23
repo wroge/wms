@@ -162,6 +162,8 @@ Done. Your requested file is here: /output
 
 Or with this [Shell-Script](#docker) and this [Configuration-File](#configuration).
 
+<img src="https://github.com/wroge/wms/blob/master/demo.svg?sanitize=true">
+
 ```console
 wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
