@@ -4,6 +4,5 @@ terrestris:
   format: ""
   layers:
   - TOPO-WMS
-  output-folder: ""
   url: http://ows.terrestris.de/osm/service
   version: ""

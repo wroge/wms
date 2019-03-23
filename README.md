@@ -59,7 +59,6 @@ mkdir -m 777 ${HOME}/wms-config && echo 'terrestris:
   format: ""
   layers:
   - TOPO-WMS
-  output-folder: ""
   url: http://ows.terrestris.de/osm/service
   version: ""' > ${HOME}/wms-config/.wms.yaml && chmod +x ${HOME}/wms-config/.wms.yaml
 ```
