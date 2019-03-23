@@ -33,7 +33,7 @@ Docker-Images [@DockerHub](https://hub.docker.com/r/wroge/wms)
 echo '#!/bin/sh
 
 if [[ $1 == "upgrade" ]]; then
-    docker pull -a wroge/wms
+    docker pull -a wroge/wms:latest
     exit 0
 fi
 

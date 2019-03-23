@@ -40,3 +40,19 @@ dockers:
   - image_templates:
     - "wroge/wms:latest"
     - "wroge/wms:{{ .Tag }}"
+scoop:
+  # Repository to push the app manifest to.
+  bucket:
+    owner: wroge
+    name: scoop-bucket
+  commit_author:
+    name: wroge
+  homepage: https://github.com/wroge/wms
+  description: "Extension for easy use of Web Map Services."
+brew:
+    github:
+      owner: wroge
+      name: homebrew-tap
+    description: "Extension for easy use of Web Map Services."
+    homepage:  https://github.com/wroge/wms
+    folder: Formula
