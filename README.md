@@ -158,7 +158,7 @@ docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/
 http://ows.terrestris.de/osm/service?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&FORMAT=image/jpeg&LAYERS=OSM-WMS&STYLES=&SRS=EPSG:3857&WIDTH=1000&HEIGHT=1000&BBOX=1110998.5364747,7078816.8197398,1119515.6176323,7087113.4792617
 Done. Your requested file is here: /output
 ```
-![test](https://user-images.githubusercontent.com/44040384/54848416-7ffab480-4ce1-11e9-9fa9-b092a6e096ad.jpeg)
+<img src="https://user-images.githubusercontent.com/44040384/54848416-7ffab480-4ce1-11e9-9fa9-b092a6e096ad.jpeg" width="50%">
 
 Or with this [Shell-Script](#docker) and this [Configuration-File](#configuration).
 
