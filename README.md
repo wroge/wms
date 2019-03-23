@@ -46,6 +46,8 @@ fi
 docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@' > ${PATH%%:*}/wms && chmod +x ${PATH%%:*}/wms
 ```
 
+Then you can use ```wms upgrade```to get the newest version.
+
 ## Configuration
 
 ```$HOME/wms-config/.wms.yaml```
