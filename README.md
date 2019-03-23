@@ -50,17 +50,8 @@ docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wm
 
 ```$HOME/wms-config/.wms.yaml```
 
-Example [Configuration](https://github.com/wroge/wms/blob/master/wms-config/.wms.yaml). (tested for macOS)
-
 ```console
-mkdir -m 777 ${HOME}/wms-config && echo 'terrestris:
-  epsg: 25832
-  file-name: example
-  format: ""
-  layers:
-  - TOPO-WMS
-  url: http://ows.terrestris.de/osm/service
-  version: ""' > ${HOME}/wms-config/.wms.yaml && chmod +x ${HOME}/wms-config/.wms.yaml
+wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
 ```
 
 And Usage.
