@@ -50,6 +50,8 @@ docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wm
 
 ```$HOME/wms-config/.wms.yaml```
 
+Example.
+
 ```console
 wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
 ```
@@ -58,8 +60,7 @@ And Usage.
 
 ```console
 wms cap terrestris
-
-docker run -v $HOME/wms-config:/wms-config wroge/wms cap terrestris
+wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
 Note: Before v0.0.5 Config-File: ```$HOME/.wms-cli.yaml```
@@ -125,37 +126,6 @@ Flags:
 
 Global Flags:
       --help   Help about any command
-```
-
-## Example
-
-In this Example we use the OSM-WMS from [terrestris](https://ows.terrestris.de/dienste.html#openstreetmap-wms).
-
-From terrestris provided EPSG-Codes: 900913, 4326, 3857
-
-From wroge/wms provided EPSG-Codes: [go-coo](https://github.com/wroge/go-coo)
-
-```console
-docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 12345
-Error: Invalid EPSG: 12345
-Valid EPSGs: [900913 4326 3857 31468 4462 32632 25832 25833 5668 31466 31467 4647 5650 3067 5669 31469 32633]
-```
-
-So we can use for example EPSG:25832 and the coordinates are automatically converted to a supported system. (here EPSG:3857)
-
-```console
-docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 25832 -b 565000,5930000,570000,5935000 -w 1000 -n test
-http://ows.terrestris.de/osm/service?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&FORMAT=image/jpeg&LAYERS=OSM-WMS&STYLES=&SRS=EPSG:3857&WIDTH=1000&HEIGHT=1000&BBOX=1110998.5364747,7078816.8197398,1119515.6176323,7087113.4792617
-Done. Your requested file is here: /output
-```
-<img src="https://user-images.githubusercontent.com/44040384/54848416-7ffab480-4ce1-11e9-9fa9-b092a6e096ad.jpeg" width="50%">
-
-Or with this [Shell-Script](#docker) and this [Configuration-File](#configuration).
-
-<img src="https://github.com/wroge/wms/blob/master/demo.svg?sanitize=true">
-
-```console
-wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
 ## FAQ
