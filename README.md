@@ -1,15 +1,14 @@
-# Web Map Service - Command Line Tool
+# Web Map Service - Manager
 
-This Command Line Tool helps you to manage Web Map Services.
+A command-line-tool for easy use of Web Map Services. 
+You can download WMS-Tiles and check the Capabilities of a service. Including:
 
-- Configuration-File ```$HOME/wms-config/.wms.yaml```
-- Support-Messages
-- Automatic Coordinate-Transformation by [go-coo](https://github.com/wroge/go-coo)
-- Download multiple Bounding Boxes at once
+- Set specific requests in a configuration file
+- Get helpful error messages
+- Automatic Coordinate Transformation into a supported format
+- Download several bounding boxes at the same time
 
 ## Install
-
-### Download
 
 - Linux (i386/x86_64)
 - MacOS (i386/x86_64)
@@ -17,117 +16,70 @@ This Command Line Tool helps you to manage Web Map Services.
 
 [Releases](https://github.com/wroge/wms/releases)
 
+Alternatively, you can install ```wms``` via Homebrew, Scoop or Docker.
+
+### Homebrew (MacOS)
+
+```
+brew install wroge/tap/wms
+```
+
+### Scoop (Windows)
+
+```
+scoop bucket add app https://github.com/wroge/scoop-bucket
+scoop install wms
+```
+
 ### Docker
 
-You have Docker installed? Then try this commands.
-
-```console
-docker run -v "$(pwd)/output:/output" wroge/wms map -u http://ows.terrestris.de/osm/service -e 25832 -b 565000,5930000,570000,5935000 -w 1000
-docker run wroge/wms cap -u http://ows.terrestris.de/osm/service
 ```
-Docker-Images [@DockerHub](https://hub.docker.com/r/wroge/wms)
-
-[Example-Script](https://github.com/wroge/wms/blob/master/wms) for better usage. (tested for macOS)
-
-```console
-echo '#!/bin/sh
-
-if [[ $1 == "upgrade" ]]; then
-    docker pull -a wroge/wms:latest
-    exit 0
-fi
-
-if [ -z $VERSION ]; then
-    VERSION+=":latest"
-else
-    VERSION=":${VERSION}"
-fi
-
-docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms$VERSION $@' > ${PATH%%:*}/wms && chmod +x ${PATH%%:*}/wms
+docker pull wroge/wms:latest
+docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms
 ```
 
-Then you can use ```wms upgrade```to get the newest version.
+## Features
 
-## Configuration
+### Configuration
 
-```$HOME/wms-config/.wms.yaml```
+You can change the configuration using ```--save``` or edit the configuration file ```$HOME/wms-config/.wms.yaml``` directly. 
 
-Example.
-
-```console
+```
 wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
 ```
 
-And Usage.
+### Helpful error-messages
 
-```console
-wms cap terrestris
-wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
+You can look up the capabilities ```wms cap terrestris``` or just try it out.
+
+```
+wms map terrestris -l abc
+wms map -u http://ows.terrestris.de/osm/service -l abc
+Error: Invalid Layer: abc
+Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SRTM30-Colored SRTM30-Colored-Hillshade SRTM30-Contour]
 ```
 
-Note: Before v0.0.5 Config-File: ```$HOME/.wms-cli.yaml```
+### Automatic Coordinate Transformation
 
-## Help
+Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a few coordinate reference systems. With this program you can choose from a larger number of EPSG codes. Please open an issue in the [go-coo](https://github.com/wroge/go-coo) repository to support your specific system.
 
-GetMap.
-
-```console
-wms map --help
-Download a WMS-Tile
-
-Usage:
-  wms map [flags]
-
-Aliases:
-  map, getmap
-
-Flags:
-  -b, --bbox strings       Set bbox in meters (minx,miny,maxx,maxy)
-  -B, --bbox-file string   Set bbox file
-  -C, --cut                Cuts image to unexpanded bbox (interesting for dynamically generated texts and symbols)
-  -i, --dpi int            Set dpi of output image (scale required!)
-      --dry-run            Validate your request without executing
-  -e, --epsg int           Set epsg-code
-  -E, --expand int         Expands bbox in %
-  -n, --file-name string   Set file name
-  -f, --format string      Set format
-  -h, --height int         Set height of output image in px
-  -l, --layers strings     Set layers
-      --password string    Set password for Basic Authentication
-      --save string        Save your request settings
-  -s, --scale int          Set scale of output image (dpi required!)
-  -u, --url string         Set url
-      --user string        Set user for Basic Authentication
-  -v, --version string     Set version
-  -w, --width int          Set width of output image in px
-
-Global Flags:
-      --help   Help about any command
+```
+wms map terrestris -e 12345
+wms map -u http://ows.terrestris.de/osm/service -e 12345
+Error: Invalid EPSG: 12345
+Valid EPSGs: [4326 3857 900913 25833 5668 5669 31467 31468 31469 32632 3067 4647 4462 25832 31466 32633 5650]
 ```
 
-GetCapabilities.
+### Download several bounding boxes
 
-```console
-wms cap --help
-Get the capabilities of a WMS
+You can create a text file that contains all the required bounding boxes and download them at the same time.
 
-Usage:
-  wms cap [flags]
-
-Aliases:
-  cap, getcap
-
-Flags:
-  -e, --epsg              Get available epsg-codes
-  -f, --formats           Get available formats
-  -l, --layers            Get available layers
-      --password string   Set password
-  -u, --url string        Set url
-      --user string       Set user
-  -v, --version string    Set version
-
-Global Flags:
-      --help   Help about any command
+```
+cat $HOME/bbox-wgs84.txt
+9,52,9.2,52.2
+9.2,52,9.4,52.2
+9.4,52,9.6,52.2
+wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 -e 4326
 ```
 
 ## FAQ
