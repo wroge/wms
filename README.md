@@ -46,14 +46,16 @@ You can change the configuration using ```--save``` or edit the configuration fi
 
 ```
 wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
+wms cap terrestris
+wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
 ### Helpful error-messages
 
-You can look up the capabilities ```wms cap terrestris``` or just try it out.
+You can look up the capabilities ```wms cap``` or just try it out.
 
 ```
-wms map terrestris -l abc
+wms cap -u http://ows.terrestris.de/osm/service -l
 wms map -u http://ows.terrestris.de/osm/service -l abc
 Error: Invalid Layer: abc
 Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SRTM30-Colored SRTM30-Colored-Hillshade SRTM30-Contour]
@@ -64,7 +66,6 @@ Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SR
 Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a few coordinate reference systems. With this program you can choose from a larger number of EPSG codes. Please open an issue in the [go-coo](https://github.com/wroge/go-coo) repository to support your specific system.
 
 ```
-wms map terrestris -e 12345
 wms map -u http://ows.terrestris.de/osm/service -e 12345
 Error: Invalid EPSG: 12345
 Valid EPSGs: [4326 3857 900913 25833 5668 5669 31467 31468 31469 32632 3067 4647 4462 25832 31466 32633 5650]
@@ -81,6 +82,13 @@ cat $HOME/bbox-wgs84.txt
 9.4,52,9.6,52.2
 wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 -e 4326
 ```
+
+### More
+
+- Automatic image size calculation (width, height or dpi & scale)
+- Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
+- Basic Authentication
+- ```wms map --help"
 
 ## FAQ
 
