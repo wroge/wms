@@ -8,6 +8,8 @@ replace github.com/wroge/wms/getmap => ../getmap
 
 replace github.com/wroge/wms/content => ../content
 
+replace github.com/wroge/wms/cli => ../cli
+
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/disintegration/imaging v1.6.0

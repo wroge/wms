@@ -18,7 +18,7 @@ You can download WMS-Tiles and check the Capabilities of a service. Including:
 
 [Releases](https://github.com/wroge/wms/releases)
 
-Alternatively, you can install ```wms``` via Homebrew, Scoop or Docker.
+Alternatively, you can install ```wms``` via Homebrew, Scoop or Docker. Of course, you can also create the executable file from source.
 
 ### Homebrew (MacOS)
 
@@ -38,6 +38,16 @@ scoop install wms
 ```
 docker pull wroge/wms:latest
 docker run -v "$(pwd)/output:/output" -v "$HOME/wms-config:/wms-config" wroge/wms
+```
+
+### From Source
+
+This Go-Project is using ```go mod```. Please clone this repository outside of ```GOPATH```.
+
+```
+git clone https://github.com/wroge/wms.git
+cd wms
+go build -o wms ./cli
 ```
 
 ## Features
