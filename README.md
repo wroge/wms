@@ -88,7 +88,8 @@ wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 
 - Automatic image size calculation (width, height or dpi & scale)
 - Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
 - Basic Authentication
-- ```wms map --help"
+- ```wms map --help"```
+- ```wms cap --help"```
 
 ## FAQ
 
