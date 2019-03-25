@@ -62,12 +62,12 @@ go build -o wms ./cli
 You can change the configuration using ```--save``` or edit the configuration file ```$HOME/wms-config/.wms.yaml``` directly. 
 
 ```
-wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
+wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l OSM-WMS --save terrestris --dry-run
 Saving service: terrestris
 URL: http://ows.terrestris.de/osm/service
 Version: 1.1.1
 Format: image/jpeg
-Layers: [TOPO-WMS]
+Layers: [OSM-WMS]
 Styles: []
 EPSG: 25832
 File name: example
@@ -93,9 +93,12 @@ Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SR
 
 ### Automatic Coordinate Transformation
 
-Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a few coordinate reference systems. With this program you can choose from a larger number of EPSG codes. Please open an issue in the [go-coo](https://github.com/wroge/go-coo) repository to support your specific system.
+Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a few coordinate reference systems. With ```wms map``` you can choose from a larger number of EPSG codes. Please open an issue in the [go-coo](https://github.com/wroge/go-coo) repository to support your specific system.
 
 ```
+wms cap -u http://ows.terrestris.de/osm/service -e
+[4326 3857 900913]
+
 wms map -u http://ows.terrestris.de/osm/service -e 12345
 Error: Invalid EPSG: 12345
 Valid EPSGs: [900913 4326 3857 31467 32633 3067 25833 5669 4277 25832 32632 5650 4647 27700 31466 4462 5668 31468 31469]
@@ -103,21 +106,31 @@ Valid EPSGs: [900913 4326 3857 31467 32633 3067 25833 5669 4277 25832 32632 5650
 
 ### Download several bounding boxes
 
-You can create a text file that contains all the required bounding boxes and download them at the same time.
+You can create a text file that contains all the required bounding boxes and download them concurrently. (Using Goroutines)
 
 ```
 cat $HOME/bbox-wgs84.txt
 9,52,9.2,52.2
 9.2,52,9.4,52.2
 9.4,52,9.6,52.2
+
 wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 -e 4326
+```
+
+### Automatic image ize calculation
+
+GetMap-Requests require a ```WIDTH```and a ```HEIGHT```parameter. ```wms map``` calculates these parameters based on the UTM-size. You can define ```--height```, ```--width```or ```--dpi & --scale```.
+
+```
+wms map terrestris -b 565000,5930000,570000,5935000 --width 1000
+wms map terrestris -b 565000,5930000,570000,5935000 --height 1000
+wms map terrestris -b 565000,5930000,570000,5935000 --dpi 100 --scale 10000
 ```
 
 ### More
 
-- Automatic image size calculation (width, height or dpi & scale)
 - Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
-- Basic Authentication
+- Basic Authentication with ```--user```&```--password```
 - ```wms map --help"```
 - ```wms cap --help"```
 
