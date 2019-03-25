@@ -2,12 +2,12 @@
 
 # Web Map Service - Manager
 
-A command-line-tool for easy use of Web Map Services. 
+A command-line-tool to simplify the use of Web Map Services.
 You can download WMS-Tiles and check the Capabilities of a service. Including:
 
 - Set specific requests in a configuration file
 - Get helpful error messages
-- Automatic Coordinate Transformation into a supported format
+- Automatic Coordinate Transformation into a supported reference system
 - Download several bounding boxes at the same time
 
 ## Install
@@ -24,6 +24,9 @@ Alternatively, you can install ```wms``` via Homebrew, Scoop or Docker. Of cours
 
 ```
 brew install wroge/tap/wms
+
+// get latest version
+brew upgrade wroge/tap/wms
 ```
 
 ### Scoop (Windows)
@@ -34,6 +37,8 @@ scoop install wms
 ```
 
 ### Docker
+
+Docker-Images: [@DockerHub](https://hub.docker.com/r/wroge/wms/tags)
 
 ```
 docker pull wroge/wms:latest
@@ -58,7 +63,18 @@ You can change the configuration using ```--save``` or edit the configuration fi
 
 ```
 wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l TOPO-WMS --save terrestris --dry-run
+Saving service: terrestris
+URL: http://ows.terrestris.de/osm/service
+Version: 1.1.1
+Format: image/jpeg
+Layers: [TOPO-WMS]
+Styles: []
+EPSG: 25832
+File name: example
+
 wms cap terrestris
+...
+
 wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
@@ -68,6 +84,8 @@ You can look up the capabilities ```wms cap``` or just try it out.
 
 ```
 wms cap -u http://ows.terrestris.de/osm/service -l
+[OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SRTM30-Colored SRTM30-Colored-Hillshade SRTM30-Contour]
+
 wms map -u http://ows.terrestris.de/osm/service -l abc
 Error: Invalid Layer: abc
 Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SRTM30-Colored SRTM30-Colored-Hillshade SRTM30-Contour]
@@ -80,7 +98,7 @@ Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a f
 ```
 wms map -u http://ows.terrestris.de/osm/service -e 12345
 Error: Invalid EPSG: 12345
-Valid EPSGs: [4326 3857 900913 25833 5668 5669 31467 31468 31469 32632 3067 4647 4462 25832 31466 32633 5650]
+Valid EPSGs: [900913 4326 3857 31467 32633 3067 25833 5669 4277 25832 32632 5650 4647 27700 31466 4462 5668 31468 31469]
 ```
 
 ### Download several bounding boxes
