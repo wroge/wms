@@ -354,7 +354,7 @@ func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
 }
 
 // GetMap returns a bytes.Reader which contains the image data and the width and height of the image
-func (s *Service) From(minx, miny, maxx, maxy float64, o GetMapOption) (r *bytes.Reader, width, height int, err error) {
+func (s *Service) GetMap(minx, miny, maxx, maxy float64, o GetMapOption) (r *bytes.Reader, width, height int, err error) {
 	width, height, err = o(s, minx, miny, maxx, maxy)
 	if err != nil {
 		return

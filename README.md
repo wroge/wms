@@ -57,27 +57,6 @@ go build -o wms ./cli
 
 ## Features
 
-### Configuration
-
-You can change the configuration using ```--save``` or edit the configuration file ```$HOME/wms-config/.wms.yaml``` directly. 
-
-```
-wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l OSM-WMS --save terrestris --dry-run
-Saving service: terrestris
-URL: http://ows.terrestris.de/osm/service
-Version: 1.1.1
-Format: image/jpeg
-Layers: [OSM-WMS]
-Styles: []
-EPSG: 25832
-File name: example
-
-wms cap terrestris
-...
-
-wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
-```
-
 ### Helpful error-messages
 
 You can look up the capabilities ```wms cap``` or just try it out.
@@ -115,6 +94,27 @@ cat $HOME/bbox-wgs84.txt
 9.4,52,9.6,52.2
 
 wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 -e 4326
+```
+
+### Configuration
+
+You can change the configuration using ```--save``` or edit the configuration file ```$HOME/wms-config/.wms.yaml``` directly. 
+
+```
+wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l OSM-WMS --save terrestris --dry-run
+Saving service: terrestris
+URL: http://ows.terrestris.de/osm/service
+Version: 1.1.1
+Format: image/jpeg
+Layers: [OSM-WMS]
+Styles: []
+EPSG: 25832
+File name: example
+
+wms cap terrestris
+...
+
+wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 ```
 
 ### Automatic image size calculation

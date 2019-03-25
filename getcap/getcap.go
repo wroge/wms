@@ -48,7 +48,7 @@ type BBox struct {
 	MaxY float64 `xml:"maxy,attr"`
 }
 
-// Get Capabilities of a WMS service
+// From Capabilities of a WMS service
 func From(url, version, user, password string) (Abilities, error) {
 	var c Abilities
 	request := url + "?SERVICE=WMS&REQUEST=GetCapabilities"

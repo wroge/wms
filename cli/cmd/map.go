@@ -288,9 +288,9 @@ func getImageC(s *getmap.Service, bboxes [][]float64, i int, b []float64, expand
 	if width != 0 || height != 0 {
 		width = int(math.Round(float64(width) * (1 + float64(expand)/100)))
 		height = int(math.Round(float64(height) * (1 + float64(expand)/100)))
-		r, width, height, err = s.From(b[0]-expandX/2, b[1]-expandY/2, b[2]+expandX/2, b[3]+expandY/2, getmap.WidthHeightOption(width, height))
+		r, width, height, err = s.GetMap(b[0]-expandX/2, b[1]-expandY/2, b[2]+expandX/2, b[3]+expandY/2, getmap.WidthHeightOption(width, height))
 	} else {
-		r, width, height, err = s.From(b[0]-expandX/2, b[1]-expandY/2, b[2]+expandX/2, b[3]+expandY/2, getmap.ScaleDPIOption(scale, dpi))
+		r, width, height, err = s.GetMap(b[0]-expandX/2, b[1]-expandY/2, b[2]+expandX/2, b[3]+expandY/2, getmap.ScaleDPIOption(scale, dpi))
 	}
 	if err != nil {
 		errs <- err
