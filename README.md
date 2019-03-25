@@ -117,7 +117,7 @@ cat $HOME/bbox-wgs84.txt
 wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 -e 4326
 ```
 
-### Automatic image ize calculation
+### Automatic image size calculation
 
 GetMap-Requests require a ```WIDTH```and a ```HEIGHT```parameter. ```wms map``` calculates these parameters based on the UTM-size. You can define ```--height```, ```--width```or ```--dpi & --scale```.
 
