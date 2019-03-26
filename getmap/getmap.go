@@ -278,11 +278,11 @@ func (s *Service) GetFileExt() string {
 	return ""
 }
 
-// GetMapOption calculates width and height for a specific bounding box
-type GetMapOption func(*Service, float64, float64, float64, float64) (width, height int, err error)
+// Option calculates width and height for a specific bounding box
+type Option func(*Service, float64, float64, float64, float64) (width, height int, err error)
 
 // ScaleDPIOption calculates width and height via scale and dpi
-func ScaleDPIOption(scale, dpi int) GetMapOption {
+func ScaleDPIOption(scale, dpi int) Option {
 	return func(s *Service, minx, miny, maxx, maxy float64) (width, height int, err error) {
 		if scale == 0 || dpi == 0 {
 			err = errors.New("Size must be set (Width, Height, Scale/DPI)")
@@ -296,7 +296,7 @@ func ScaleDPIOption(scale, dpi int) GetMapOption {
 }
 
 // WidthHeightOption sets width and height
-func WidthHeightOption(width, height int) GetMapOption {
+func WidthHeightOption(width, height int) Option {
 	if width == 0 {
 		return HeightOption(height)
 	}
@@ -309,7 +309,7 @@ func WidthHeightOption(width, height int) GetMapOption {
 }
 
 // HeightOption calculates width via height and bounding box
-func HeightOption(height int) GetMapOption {
+func HeightOption(height int) Option {
 	return func(s *Service, minx, miny, maxx, maxy float64) (widthN, heightN int, err error) {
 		if height == 0 {
 			err = errors.New("Width or Height must be set")
@@ -322,7 +322,7 @@ func HeightOption(height int) GetMapOption {
 }
 
 // WidthOption calculates height via width and bounding box
-func WidthOption(width int) GetMapOption {
+func WidthOption(width int) Option {
 	return func(s *Service, minx, miny, maxx, maxy float64) (widthN, heightN int, err error) {
 		if width == 0 {
 			err = errors.New("Width or Height must be set")
@@ -354,7 +354,7 @@ func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
 }
 
 // GetMap returns a bytes.Reader which contains the image data and the width and height of the image
-func (s *Service) GetMap(minx, miny, maxx, maxy float64, o GetMapOption) (r *bytes.Reader, width, height int, err error) {
+func (s *Service) GetMap(minx, miny, maxx, maxy float64, o Option) (r *bytes.Reader, width, height int, err error) {
 	width, height, err = o(s, minx, miny, maxx, maxy)
 	if err != nil {
 		return
