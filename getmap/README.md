@@ -1,3 +1,5 @@
+[![](https://godoc.org/github.com/wroge/wms/getmap?status.svg)](https://godoc.org/github.com/wroge/wms/getmap)
+
 # GetMap for Go
 
 Golang package to download tiles from a Web Map Service. With informative error handling.

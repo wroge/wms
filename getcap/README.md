@@ -1,3 +1,5 @@
+[![](https://godoc.org/github.com/wroge/wms/getcap?status.svg)](https://godoc.org/github.com/wroge/wms/getcap)
+
 # GetCapabilities for Go
 
 Golang package for reading ```GetCapabilities``` documents from Web Map Services. With extensive use of the stringer interface.
