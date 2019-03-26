@@ -200,13 +200,13 @@ func (s *Service) AddEPSG(epsgCode int) (err error) {
 		return errors.New("Adding EPSG failed")
 	}
 	for _, e := range epsg.List() {
-		doub := false
+		redundant := false
 		for _, eeC := range epsgCap {
 			if eeC == e {
-				doub = true
+				redundant = true
 			}
 		}
-		if !doub {
+		if !redundant {
 			epsgCap = append(epsgCap, e)
 		}
 	}
