@@ -1,4 +1,4 @@
-// Package cap parses a GetCapabilities-Request
+// Package getcap parses a GetCapabilities-Request
 package getcap
 
 import (

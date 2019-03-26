@@ -16,12 +16,12 @@ func (a Abilities) GetLayers(layers ...string) Layers {
 	return result
 }
 
-// GetLayers returns a Layer based on a specific layer name
+// GetLayer returns a Layer based on a specific layer name
 func (a Abilities) GetLayer(layer string) Layer {
 	return a.Layers.GetLayer(layer)
 }
 
-// GetLayers returns a Layer based on a specific layer name
+// GetLayer returns a Layer based on a specific layer name
 func (ll Layers) GetLayer(layer string) Layer {
 	for _, l := range ll {
 		if l.Name == layer {

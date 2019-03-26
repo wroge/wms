@@ -1,4 +1,4 @@
-// Package wms is a package to handle and expand the abilities of Web Map Services
+// Package getmap is a package to handle and expand the abilities of Web Map Services
 package getmap
 
 import (

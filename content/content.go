@@ -1,3 +1,4 @@
+// Package content supports getcap & getmap packages
 package content
 
 import (
@@ -7,6 +8,7 @@ import (
 	"net/http"
 )
 
+// From return data from a URL with Basic Auth
 func From(url, user, password string) (b *bytes.Reader, err error) {
 	client := &http.Client{}
 	req, err := http.NewRequest("GET", url, nil)
