@@ -1,4 +1,5 @@
 [![Go Report Card](https://goreportcard.com/badge/github.com/wroge/wms)](https://goreportcard.com/report/github.com/wroge/wms)
+[![GolangCI](https://golangci.com/badges/github.com/wroge/wms.svg)](https://golangci.com/r/github.com/wroge/wms)
 
 # Web Map Service - Manager
 

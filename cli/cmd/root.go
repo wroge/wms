@@ -10,8 +10,6 @@ import (
 	"github.com/spf13/viper"
 )
 
-var cfgFile = ""
-
 var root = &cobra.Command{
 	Use: "wms",
 	Long: `This program helps you to generate images via web map services.
@@ -47,8 +45,16 @@ func initConfig() {
 	viper.SetConfigName(".wms")
 	if err := viper.ReadInConfig(); err != nil {
 		if _, err2 := os.Stat(filepath.Join(home, "wms-config", ".wms.yaml")); os.IsNotExist(err2) {
-			os.Mkdir(filepath.Join(home, "wms-config"), 0777)
-			os.Create(filepath.Join(home, "wms-config", ".wms.yaml"))
+			err = os.Mkdir(filepath.Join(home, "wms-config"), 0777)
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
+			_, err = os.Create(filepath.Join(home, "wms-config", ".wms.yaml"))
+			if err != nil {
+				fmt.Println(err)
+				os.Exit(1)
+			}
 		} else {
 			fmt.Println("Can't read config:", err)
 			os.Exit(1)
@@ -59,5 +65,9 @@ func initConfig() {
 // Execute root command
 func Execute(v string) {
 	version = v
-	root.Execute()
+	err := root.Execute()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
 }
