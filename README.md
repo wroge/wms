@@ -1,7 +1,6 @@
-[![Go Report Card](https://goreportcard.com/badge/github.com/wroge/wms)](https://goreportcard.com/report/github.com/wroge/wms)
-[![GolangCI](https://golangci.com/badges/github.com/wroge/wms.svg)](https://golangci.com/r/github.com/wroge/wms)
 [![GitHub release](https://img.shields.io/github/release/wroge/wms.svg)](https://github.com/wroge/wms/releases/latest)
-
+[![Go Report Card](https://goreportcard.com/badge/github.com/wroge/wms)](https://goreportcard.com/report/github.com/wroge/wms) 
+[![GolangCI](https://golangci.com/badges/github.com/wroge/wms.svg)](https://golangci.com/r/github.com/wroge/wms)
 
 # Web Map Service - Manager
 
@@ -37,6 +36,9 @@ brew upgrade wroge/tap/wms
 ```
 scoop bucket add app https://github.com/wroge/scoop-bucket
 scoop install wms
+
+// get latest version
+scoop update wms
 ```
 
 ### Docker
@@ -104,13 +106,13 @@ wms map -u http://ows.terrestris.de/osm/service -B $HOME/bbox-wgs84.txt -w 1000 
 You can change the configuration using ```--save``` or edit the configuration file ```$HOME/wms-config/.wms.yaml``` directly. 
 
 ```
-wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l OSM-WMS --save terrestris --dry-run
+wms map -u http://ows.terrestris.de/osm/service -n example -e 25832 -l OSM-WMS/default --save terrestris --dry-run
 Saving service: terrestris
 URL: http://ows.terrestris.de/osm/service
 Version: 1.1.1
 Format: image/jpeg
 Layers: [OSM-WMS]
-Styles: []
+Styles: [default]
 EPSG: 25832
 File name: example
 
@@ -132,7 +134,6 @@ wms map terrestris -b 565000,5930000,570000,5935000 --dpi 100 --scale 10000
 
 ### More
 
-- Define the ```STYLE```of a layer with a slash ```-l OSM-WMS/default```
 - Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
 - Basic Authentication with ```--user```&```--password```
 - ```wms map --help```
