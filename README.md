@@ -132,6 +132,7 @@ wms map terrestris -b 565000,5930000,570000,5935000 --dpi 100 --scale 10000
 
 ### More
 
+- Define the ```STYLE```of a layer with a slash ```-l OSM-WMS/default```
 - Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
 - Basic Authentication with ```--user```&```--password```
 - ```wms map --help```
