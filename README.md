@@ -10,7 +10,7 @@ You can download WMS-Tiles and check the Capabilities of a service. Including:
 
 - Set specific requests in a configuration file
 - Get helpful error messages
-- Automatic Coordinate Transformation into a supported reference system
+- Automatic coordinate transformation into a supported reference system [by go-coo](https://github.com/wroge/go-coo)
 - Download several bounding boxes at the same time
 
 ## Install
