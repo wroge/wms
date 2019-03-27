@@ -83,7 +83,7 @@ wms cap -u http://ows.terrestris.de/osm/service -e
 
 wms map -u http://ows.terrestris.de/osm/service -e 12345
 Error: Invalid EPSG: 12345
-Valid EPSGs: [900913 4326 3857 31467 32633 3067 25833 5669 4277 25832 32632 5650 4647 27700 31466 4462 5668 31468 31469]
+Valid EPSGs: [2154 4326 5668 31467 32632 32633 5650 4277 3857 25832 25833 31468 3067 4462 6870 900913 4647 27700 5669 31466 31469 6962]
 ```
 
 ### Download several bounding boxes
@@ -134,8 +134,8 @@ wms map terrestris -b 565000,5930000,570000,5935000 --dpi 100 --scale 10000
 
 - Expand & Cut bounding boxes (interesting for dynamically generated texts and symbols)
 - Basic Authentication with ```--user```&```--password```
-- ```wms map --help"```
-- ```wms cap --help"```
+- ```wms map --help```
+- ```wms cap --help```
 
 ## FAQ
 
