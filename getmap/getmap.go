@@ -55,10 +55,13 @@ func (e InvalidInput) Error() string {
 // Is called within the New constructor
 func (s *Service) GetCapabilities(user, password string) (c getcap.Abilities, err error) {
 	c, err = getcap.From(s.URL, s.Version, user, password)
+	if err != nil {
+		return
+	}
 	ff := c.Formats
 	ll := c.Layers
 	bb := c.GetBBoxes()
-	if err != nil || len(ff) < 1 || len(ll) < 1 || len(bb) < 1 || c.Version == "" {
+	if len(ff) < 1 || len(ll) < 1 || len(bb) < 1 || c.Version == "" {
 		err = InvalidInput("Invalid: Please check URL and Version")
 		return
 	}

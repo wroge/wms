@@ -67,7 +67,6 @@ func Execute(v string) {
 	version = v
 	err := root.Execute()
 	if err != nil {
-		fmt.Println(err)
 		os.Exit(1)
 	}
 }
