@@ -10,7 +10,6 @@ import (
 	"strings"
 
 	"github.com/wroge/go-coo"
-	"github.com/wroge/go-coo/epsg"
 	"github.com/wroge/wms/content"
 	"github.com/wroge/wms/getcap"
 )
@@ -202,7 +201,7 @@ func (s *Service) AddEPSG(epsgCode int) (err error) {
 	if len(epsgCap) == 0 {
 		return errors.New("Adding EPSG failed")
 	}
-	for _, e := range epsg.List() {
+	for e, _ := range coo.EPSG {
 		redundant := false
 		for _, eeC := range epsgCap {
 			if eeC == e {
@@ -338,11 +337,11 @@ func WidthOption(width int) Option {
 }
 
 func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
-	from, err := epsg.Code(e)
-	if err != nil {
+	from, ok := coo.EPSG[e]
+	if !ok {
 		return
 	}
-	to := epsg.Code4326
+	to := coo.EPSG4326
 	x1, y1, _ = coo.Transform(minx, miny, 0, from, to)
 	x2, y2, _ = coo.Transform(maxx, maxy, 0, from, to)
 	zone1 := math.Floor(x1/6) + 31
@@ -351,8 +350,8 @@ func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
 	if y1 < 0 || y2 < 0 {
 		hemisphere = "S"
 	}
-	x1, y1 = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x1, y1, nil)
-	x2, y2 = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x2, y2, nil)
+	x1, y1, _ = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x1, y1, 0, coo.WGS84)
+	x2, y2, _ = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x2, y2, 0, coo.WGS84)
 	return
 }
 
@@ -368,12 +367,12 @@ func (s *Service) GetMap(minx, miny, maxx, maxy float64, o Option) (r *bytes.Rea
 	}
 	epsgCap := s.Capabilities.GetLayers(s.Layers...).GetBBoxes().GetEPSG()
 	if !containsInt(epsgCap, s.EPSG) {
-		from, err := epsg.Code(s.EPSG)
-		if err != nil {
+		from, ok := coo.EPSG[s.EPSG]
+		if !ok {
 			return nil, 0, 0, err
 		}
-		to, err := epsg.Code(epsgCap[0])
-		if err != nil {
+		to, ok := coo.EPSG[epsgCap[0]]
+		if !ok {
 			return nil, 0, 0, err
 		}
 		minx, miny, _ = coo.Transform(minx, miny, 0, from, to)

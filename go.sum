@@ -43,8 +43,8 @@ github.com/stretchr/testify v1.2.2/go.mod h1:a8OnRcib4nhh0OaRAV+Yts87kKdq0PP7pXf
 github.com/stretchr/testify v1.3.0 h1:TivCn/peBQ7UY8ooIcPgZFpTNSz0Q2U6UrFlUfqbe0Q=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/ugorji/go/codec v0.0.0-20181204163529-d75b2dcb6bc8/go.mod h1:VFNgLljTbGfSG7qAOspJ7OScBnGdDN/yBr0sguwnwf0=
-github.com/wroge/go-coo v0.0.8 h1:FqXpr2Gle0qCc5+2pa28Ii/UhbDzOIm8qcHC1YUU8xo=
-github.com/wroge/go-coo v0.0.8/go.mod h1:tFHV+R0q1LC9gt9zjHhTES7dyeiokn8hcAfE5OOoSQE=
+github.com/wroge/go-coo v0.1.0 h1:7WnIOZ3c0Jnl7mWY9jj/bopazyp33ihw1bV4YudpQsI=
+github.com/wroge/go-coo v0.1.0/go.mod h1:tFHV+R0q1LC9gt9zjHhTES7dyeiokn8hcAfE5OOoSQE=
 github.com/xordataexchange/crypt v0.0.3-0.20170626215501-b2862e3d0a77/go.mod h1:aYKd//L2LvnjZzWKhF00oedf4jCCReLcmhLdhm1A27Q=
 golang.org/x/crypto v0.0.0-20181203042331-505ab145d0a9/go.mod h1:6SG95UA2DQfeDnfUPMdvaQW0Q7yPrPDi9nlGo2tz2b4=
 golang.org/x/image v0.0.0-20180708004352-c73c2afc3b81 h1:00VmoueYNlNz/aHIilyyQz/MHSqGoWJzpFv/HW8xpzI=

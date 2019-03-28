@@ -1,6 +1,5 @@
 [![GitHub release](https://img.shields.io/github/release/wroge/wms.svg)](https://github.com/wroge/wms/releases/latest)
 [![GolangCI](https://golangci.com/badges/github.com/wroge/wms.svg)](https://golangci.com/r/github.com/wroge/wms)
-[![Go Report Card](https://goreportcard.com/badge/github.com/wroge/wms)](https://goreportcard.com/report/github.com/wroge/wms)
 
 # Web Map Service - Manager
 
@@ -85,7 +84,14 @@ wms cap -u http://ows.terrestris.de/osm/service -e
 
 wms map -u http://ows.terrestris.de/osm/service -e 12345
 Error: Invalid EPSG: 12345
-Valid EPSGs: [2154 4326 5668 31467 32632 32633 5650 4277 3857 25832 25833 31468 3067 4462 6870 900913 4647 27700 5669 31466 31469 6962]
+Valid EPSGs: [3857 900913 4326 5650 31468 32624 25831 32605 32613 32628 32629 
+                32640 5669 32606 32614 32619 32620 32627 32639 32645 4258 6962 
+                32602 32604 32609 32618 32634 2154 6870 32601 32626 32631 32654 
+                32603 32610 32612 32641 32647 32656 32660 25833 32630 32643 32646 
+                3067 4978 25836 31466 32607 32623 32632 32651 32657 4647 32615 32616 
+                32649 32650 25838 32608 32617 32636 32637 25834 25835 32621 25829 
+                25832 32622 32633 32635 32653 4462 5668 32611 32638 32648 32652 25830 
+                32642 4277 27700 31469 32658 32659 25837 31467 32625 32644 32655]
 ```
 
 ### Download several bounding boxes
