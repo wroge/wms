@@ -19,15 +19,12 @@ You can download WMS-Tiles and check the Capabilities of a service. Including:
 
 [Releases](https://github.com/wroge/wms/releases)
 
-Alternatively, you can install ```wms``` via Homebrew, Scoop or Docker. Of course, you can also create the executable file from source.
+Alternatively, you can install ```wms``` via Homebrew, Scoop, Snapcraft or Docker. Of course, you can also create the executable file from source.
 
 ### Homebrew (MacOS)
 
 ```
 brew install wroge/tap/wms
-
-// get latest version
-brew upgrade wroge/tap/wms
 ```
 
 ### Scoop (Windows)
@@ -35,9 +32,12 @@ brew upgrade wroge/tap/wms
 ```
 scoop bucket add app https://github.com/wroge/scoop-bucket
 scoop install wms
+```
 
-// get latest version
-scoop update wms
+### Snapcraft (Linux)
+
+```
+snap install wms
 ```
 
 ### Docker
