@@ -42,10 +42,17 @@ scoop:
   commit_author:
     name: wroge
   homepage: https://github.com/wroge/wms
-  description: "Extension for easy use of Web Map Services."
+  description: "A command-line-tool to simplify the use of Web Map Services."
 brew:
   github:
     owner: wroge
     name: homebrew-tap
-  description: "Extension for easy use of Web Map Services."
+  description: "A command-line-tool to simplify the use of Web Map Services."
   homepage:  https://github.com/wroge/wms
+snapcraft:
+  summary: A command-line-tool to simplify the use of Web Map Services.
+  description: |
+    wms let you download WMS-Tiles and check the Capabilities of a service.
+  grade: stable
+  confinement: classic
+  publish: true
