@@ -54,5 +54,5 @@ snapcraft:
   description: |
     wms let you download WMS-Tiles and check the Capabilities of a service.
   grade: stable
-  confinement: classic
+  confinement: strict
   publish: true
