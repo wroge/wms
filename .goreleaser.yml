@@ -49,10 +49,10 @@ brew:
     name: homebrew-tap
   description: "A command-line-tool to simplify the use of Web Map Services."
   homepage:  https://github.com/wroge/wms
-snapcraft:
-  summary: A command-line-tool to simplify the use of Web Map Services.
-  description: |
-    wms let you download WMS-Tiles and check the Capabilities of a service.
-  grade: stable
-  confinement: strict
-  publish: true
+#snapcraft:
+#  summary: A command-line-tool to simplify the use of Web Map Services.
+#  description: |
+#    wms let you download WMS-Tiles and check the Capabilities of a service.
+#  grade: stable
+#  confinement: strict
+#  publish: true
