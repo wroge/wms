@@ -201,7 +201,7 @@ func (s *Service) AddEPSG(epsgCode int) (err error) {
 	if len(epsgCap) == 0 {
 		return errors.New("Adding EPSG failed")
 	}
-	for e, _ := range coo.EPSG {
+	for e, _ := range coo.EPSGCodes() {
 		redundant := false
 		for _, eeC := range epsgCap {
 			if eeC == e {
@@ -337,8 +337,8 @@ func WidthOption(width int) Option {
 }
 
 func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
-	from, ok := coo.EPSG[e]
-	if !ok {
+	from := coo.EPSG(e)
+	if from == nil {
 		return
 	}
 	to := coo.EPSG4326
@@ -367,12 +367,12 @@ func (s *Service) GetMap(minx, miny, maxx, maxy float64, o Option) (r *bytes.Rea
 	}
 	epsgCap := s.Capabilities.GetLayers(s.Layers...).GetBBoxes().GetEPSG()
 	if !containsInt(epsgCap, s.EPSG) {
-		from, ok := coo.EPSG[s.EPSG]
-		if !ok {
+		from := coo.EPSG(s.EPSG)
+		if from == nil {
 			return nil, 0, 0, err
 		}
-		to, ok := coo.EPSG[epsgCap[0]]
-		if !ok {
+		to := coo.EPSG(epsgCap[0])
+		if to == nil {
 			return nil, 0, 0, err
 		}
 		minx, miny, _ = coo.Transform(minx, miny, 0, from, to)
