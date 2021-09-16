@@ -9,7 +9,8 @@ import (
 	"strconv"
 	"strings"
 
-	"github.com/wroge/go-coo"
+	"github.com/wroge/wgs84"
+
 	"github.com/wroge/wms/content"
 	"github.com/wroge/wms/getcap"
 )
@@ -201,7 +202,7 @@ func (s *Service) AddEPSG(epsgCode int) (err error) {
 	if len(epsgCap) == 0 {
 		return errors.New("Adding EPSG failed")
 	}
-	for _, e := range coo.EPSGCodes() {
+	for _, e := range wgs84.EPSG().Codes() {
 		redundant := false
 		for _, eeC := range epsgCap {
 			if eeC == e {
@@ -337,21 +338,16 @@ func WidthOption(width int) Option {
 }
 
 func utmCoord(minx, miny, maxx, maxy float64, e int) (x1, y1, x2, y2 float64) {
-	from := coo.EPSG(e)
-	if from == nil {
-		return
-	}
-	to := coo.EPSG4326
-	x1, y1, _ = coo.Transform(minx, miny, 0, from, to)
-	x2, y2, _ = coo.Transform(maxx, maxy, 0, from, to)
+	x1, y1, _ = wgs84.EPSG().Transform(e, 4326)(minx, miny, 0)
+	x2, y2, _ = wgs84.EPSG().Transform(e, 4326)(maxx, maxy, 0)
 	zone1 := math.Floor(x1/6) + 31
 	zone2 := math.Floor(x2/6) + 31
-	hemisphere := "N"
+	northern := true
 	if y1 < 0 || y2 < 0 {
-		hemisphere = "S"
+		northern = false
 	}
-	x1, y1, _ = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x1, y1, 0, coo.WGS84)
-	x2, y2, _ = coo.UTM((zone1+zone2)/2, hemisphere).FromGeographic(x2, y2, 0, coo.WGS84)
+	x1, y1, _ = wgs84.Transform(wgs84.LonLat(), wgs84.UTM((zone1+zone2)/2, northern))(x1, y1, 0)
+	x2, y2, _ = wgs84.Transform(wgs84.LonLat(), wgs84.UTM((zone1+zone2)/2, northern))(x2, y2, 0)
 	return
 }
 
@@ -367,16 +363,16 @@ func (s *Service) GetMap(minx, miny, maxx, maxy float64, o Option) (r *bytes.Rea
 	}
 	epsgCap := s.Capabilities.GetLayers(s.Layers...).GetBBoxes().GetEPSG()
 	if !containsInt(epsgCap, s.EPSG) {
-		from := coo.EPSG(s.EPSG)
+		from := wgs84.EPSG().Code(s.EPSG)
 		if from == nil {
 			return nil, 0, 0, err
 		}
-		to := coo.EPSG(epsgCap[0])
+		to := wgs84.EPSG().Code(epsgCap[0])
 		if to == nil {
 			return nil, 0, 0, err
 		}
-		minx, miny, _ = coo.Transform(minx, miny, 0, from, to)
-		maxx, maxy, _ = coo.Transform(maxx, maxy, 0, from, to)
+		minx, miny, _ = wgs84.Transform(from, to)(minx, miny, 0)
+		maxx, maxy, _ = wgs84.Transform(from, to)(maxx, maxy, 0)
 		s.EPSG = epsgCap[0]
 	}
 	bbox := s.Capabilities.GetBBox(s.EPSG)

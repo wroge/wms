@@ -7,7 +7,7 @@ import (
 var version = "No Version Provided"
 
 func main() {
-	//t := time.Now()
+	// t := time.Now()
 	cmd.Execute(version)
-	//fmt.Println(time.Since(t))
+	// fmt.Println(time.Since(t))
 }

@@ -24,7 +24,7 @@ var getmapCommand = &cobra.Command{
 	Short:   "Download a WMS-Tile",
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		s := &getmap.Service{}
-		var service = "default"
+		service := "default"
 		if len(args) == 1 {
 			service = args[0]
 		}
@@ -300,7 +300,7 @@ func getImageC(s *getmap.Service, bboxes [][]float64, i int, b []float64, expand
 	if ext == "" {
 		ext = "png"
 	}
-	_ = os.MkdirAll("output", 0777)
+	_ = os.MkdirAll("output", 0o777)
 	var filePath string
 	if len(bboxes) > 1 {
 		filePath = filepath.Join("output", fmt.Sprintf("%02d_%v.%v", i+1, name, ext))

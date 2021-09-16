@@ -15,7 +15,7 @@ var getcapCommand = &cobra.Command{
 	Short:   "Get the capabilities of a WMS",
 	RunE: func(cmd *cobra.Command, args []string) (err error) {
 		w := &getmap.Service{}
-		var service = "default"
+		service := "default"
 		if len(args) == 1 {
 			service = args[0]
 		}
