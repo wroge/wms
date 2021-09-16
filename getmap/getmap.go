@@ -156,7 +156,7 @@ func AddLayers(layers ...string) func(*Service) error {
 func (s *Service) AddLayers(layers ...string) (err error) {
 	for _, l := range layers {
 		cl := s.Capabilities.GetLayer(l)
-		if cl.Name == "" || len(cl.BBoxes) < 1 {
+		if cl.Name == "" {
 			return InvalidValue{"Layer", l, s.Capabilities.GetLayerNames()}
 		}
 	}
@@ -198,7 +198,7 @@ func AddEPSG(epsgCode int) func(*Service) error {
 
 // AddEPSG adds an EPSG code to a Service
 func (s *Service) AddEPSG(epsgCode int) (err error) {
-	epsgCap := s.Capabilities.GetLayers(s.Layers...).GetBBoxes().GetEPSG()
+	epsgCap := s.Capabilities.GetBBoxes().GetEPSG()
 	if len(epsgCap) == 0 {
 		return errors.New("Adding EPSG failed")
 	}
@@ -361,7 +361,7 @@ func (s *Service) GetMap(minx, miny, maxx, maxy float64, o Option) (r *bytes.Rea
 		err = InvalidInput("Invalid: Image is too big: " + strconv.Itoa(width*height) + " Max Pixel: " + strconv.Itoa(MaxPixel))
 		return
 	}
-	epsgCap := s.Capabilities.GetLayers(s.Layers...).GetBBoxes().GetEPSG()
+	epsgCap := s.Capabilities.GetBBoxes().GetEPSG()
 	if !containsInt(epsgCap, s.EPSG) {
 		from := wgs84.EPSG().Code(s.EPSG)
 		if from == nil {

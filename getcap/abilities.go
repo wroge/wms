@@ -33,7 +33,11 @@ func (ll Layers) GetLayer(layer string) Layer {
 
 // GetBBox returns a BBox based on a specific EPSG code
 func (a Abilities) GetBBox(epsg int) BBox {
-	return a.Layers.GetBBox(epsg)
+	bbox := a.Layers.GetBBox(epsg)
+	if bbox.MinX != 0 && bbox.MaxX != 0 {
+		return bbox
+	}
+	return a.BBoxes.GetBBox(epsg)
 }
 
 // GetBBox returns a BBox based on a specific EPSG code
@@ -60,7 +64,16 @@ func (bb BBoxes) GetBBox(epsg int) BBox {
 
 // GetBBoxes returns BBoxes merged from all Layers
 func (a Abilities) GetBBoxes() BBoxes {
-	return a.Layers.GetBBoxes()
+	var bb []BBox
+
+	for _, b := range append(a.Layers.GetBBoxes(), a.BBoxes...) {
+		if (b.CRS == "" && b.SRS == "") || (b.MinX == 0 && b.MaxX == 0) {
+			continue
+		}
+		bb = append(bb, b)
+	}
+
+	return bb
 }
 
 // GetBBoxes returns BBoxes merged from Layers

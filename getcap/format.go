@@ -26,6 +26,10 @@ func (a Abilities) String() string {
 		result += "\nLayers:\n"
 		result += a.Layers.String()
 	}
+	if a.BBoxes != nil {
+		result += "\nBBoxes:\n"
+		result += a.BBoxes.String()
+	}
 	return result
 }
 

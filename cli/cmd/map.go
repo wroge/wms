@@ -145,7 +145,6 @@ var getmapCommand = &cobra.Command{
 				return err
 			}
 		}
-
 		if cmd.Flag("dry-run").Changed {
 			fmt.Println(s)
 			fmt.Println("File name:", name)

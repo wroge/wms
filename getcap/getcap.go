@@ -29,6 +29,7 @@ type Abilities struct {
 	Abstract string  `xml:"Service>Abstract"`
 	Formats  Formats `xml:"Capability>Request>GetMap>Format"`
 	Layers   Layers  `xml:"Capability>Layer>Layer"`
+	BBoxes   BBoxes  `xml:"Capability>Layer>BoundingBox"`
 }
 
 // Layer of a GetCapabilities-Request
