@@ -4,7 +4,6 @@ env:
 before:
   hooks:
     - go mod tidy
-    - ./scripts/completions.sh
 
 snapshot:
   name_template: '{{ incpatch .Version }}-next'
@@ -12,6 +11,7 @@ snapshot:
 builds:
   - env:
       - CGO_ENABLED=0
+    main: ./cli
     goos:
       - linux
       - darwin
@@ -25,7 +25,7 @@ builds:
     flags:
       - -trimpath
     ldflags:
-      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=wroge
 
 checksum:
   name_template: 'checksums.txt'
@@ -58,8 +58,7 @@ archives:
         format: zip
     files:
       - README.md
-      - LICENSE.md
-      - completions/*
+      - LICENSE
 
 brews:
   - tap:
