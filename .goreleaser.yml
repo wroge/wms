@@ -1,58 +1,78 @@
+env:
+  - GO111MODULE=on
+
 before:
   hooks:
-    - go mod download
+    - go mod tidy
+    - ./scripts/completions.sh
+
+snapshot:
+  name_template: '{{ incpatch .Version }}-next'
+
 builds:
-- 
-  binary: wms
-  goos:
-  - windows
-  - linux
-  - darwin
-  goarch:
-  - 386
-  - amd64
-  main: ./cli
-  env:
-  - CGO_ENABLED=0
-archive:
-  replacements:
-    darwin: MacOS
-    linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+      - darwin
+      - windows
+    goarch:
+      - 386
+      - amd64
+      - arm
+      - arm64
+    mod_timestamp: '{{ .CommitTimestamp }}'
+    flags:
+      - -trimpath
+    ldflags:
+      - -s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{ .CommitDate }} -X main.builtBy=goreleaser
+
 checksum:
   name_template: 'checksums.txt'
-snapshot:
-  name_template: "{{ .Tag }}-next"
+
 changelog:
   sort: asc
   filters:
     exclude:
-    - '^docs:'
-    - '^test:'
+      - '^docs:'
+      - '^test:'
+      - Merge pull request
+      - Merge branch
+      - go mod tidy
+
 dockers:
   - image_templates:
-    - "wroge/wms:latest"
-    - "wroge/wms:{{ .Tag }}"
+      - 'wroge/wms:latest'
+      - 'wroge/wms:{{ .Tag }}'
+
+archives:
+  - name_template: '{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}'
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    format_overrides:
+      - goos: windows
+        format: zip
+    files:
+      - README.md
+      - LICENSE.md
+      - completions/*
+
+brews:
+  - tap:
+      owner: wroge
+      name: homebrew-tap
+    homepage:  https://github.com/wroge/wms
+    description: A command-line-tool to simplify the use of Web Map Services.
+    license: MIT
+
 scoop:
   bucket:
     owner: wroge
     name: scoop-bucket
-  commit_author:
-    name: wroge
-  homepage: https://github.com/wroge/wms
-  description: "A command-line-tool to simplify the use of Web Map Services."
-brew:
-  github:
-    owner: wroge
-    name: homebrew-tap
-  description: "A command-line-tool to simplify the use of Web Map Services."
   homepage:  https://github.com/wroge/wms
-#snapcraft:
-#  summary: A command-line-tool to simplify the use of Web Map Services.
-#  description: |
-#    wms let you download WMS-Tiles and check the Capabilities of a service.
-#  grade: stable
-#  confinement: strict
-#  publish: true
+  description: A command-line-tool to simplify the use of Web Map Services.
+  license: MIT

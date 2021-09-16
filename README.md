@@ -92,7 +92,6 @@ Error: Invalid EPSG: 12345
         5668 25833 25836 32609 32615 4647 25832 31469 32620 32641 32644 4277 25837 
         32610 32646 54027 32624 32629 32637 32658 4462 25830 25831 32625 32626 32635 
         4978 32606 32618 3395 25835 32602 32617 32623 32653 32604]
-
 ```
 
 ### Download several bounding boxes
@@ -131,10 +130,13 @@ wms map terrestris -b 565000,5930000,570000,5935000 -w 1000
 
 ### Automatic image size calculation
 
-GetMap-Requests require a ```WIDTH```and a ```HEIGHT```parameter. ```wms map``` calculates these parameters based on the UTM-size. You can define ```--height```, ```--width```or ```--dpi & --scale```.
+GetMap-Requests require a ```WIDTH```and a ```HEIGHT```parameter. ```wms map``` calculates these parameters based on the UTM-size (ideal for small regions). You can define ```--height```, ```--width```or ```--dpi & --scale```.
 
 ```
 wms map terrestris -b 565000,5930000,570000,5935000 --width 1000
+http://ows.terrestris.de/osm/service?SERVICE=WMS&REQUEST=GetMap&VERSION=1.1.1&FORMAT=image/jpeg&LAYERS=OSM-WMS&STYLES=default&SRS=EPSG:900913&WIDTH=1000&HEIGHT=1000&BBOX=1110998.5409540,7078815.1864107,1119515.6232213,7087111.5778055
+Done. Your requested file is here: <output>
+
 wms map terrestris -b 565000,5930000,570000,5935000 --height 1000
 wms map terrestris -b 565000,5930000,570000,5935000 --dpi 100 --scale 10000
 ```
