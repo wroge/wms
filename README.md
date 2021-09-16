@@ -1,5 +1,4 @@
 [![GitHub release](https://img.shields.io/github/release/wroge/wms.svg)](https://github.com/wroge/wms/releases/latest)
-[![GolangCI](https://golangci.com/badges/github.com/wroge/wms.svg)](https://golangci.com/r/github.com/wroge/wms)
 [![Go Report Card](https://goreportcard.com/badge/github.com/wroge/wms)](https://goreportcard.com/report/github.com/wroge/wms)
 
 # Web Map Service - Manager
@@ -9,7 +8,7 @@ You can download WMS-Tiles and check the Capabilities of a service. Including:
 
 - Set specific requests in a configuration file
 - Get helpful error messages
-- Automatic coordinate transformation into a supported reference system [by go-coo](https://github.com/wroge/go-coo)
+- Automatic coordinate transformation into a supported reference system [by wroge/wgs84](https://github.com/wroge/wgs84)
 - Download several bounding boxes at the same time
 
 ## Install
@@ -77,7 +76,7 @@ Valid Layers: [OSM-WMS OSM-Overlay-WMS TOPO-WMS TOPO-OSM-WMS SRTM30-Hillshade SR
 
 ### Automatic Coordinate Transformation
 
-Supported by [go-coo](https://github.com/wroge/go-coo).  Some WMS allow only a few coordinate reference systems. With ```wms map``` you can choose from a larger number of EPSG codes. Please open an issue in the [go-coo](https://github.com/wroge/go-coo) repository to support your specific system.
+Supported by [wroge/wgs84](https://github.com/wroge/wgs84).  Some WMS allow only a few coordinate reference systems. With ```wms map``` you can choose from a larger number of EPSG codes. Please open an issue in the [wroge/wgs84](https://github.com/wroge/wgs84) repository to support your specific system.
 
 ```
 wms cap -u http://ows.terrestris.de/osm/service -e
